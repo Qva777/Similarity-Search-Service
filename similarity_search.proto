@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package similarity;
+
+message Item {
+    string id = 1;
+    string description = 2;
+}
+
+message AddItemRequest {
+    Item item = 1;
+}
+
+message AddItemResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message SearchItemsRequest {
+    string query = 1;
+}
+
+message SearchResult {
+    string id = 1;
+    string description = 2;
+    float similarity_score = 3;
+}
+
+message SearchItemsResponse {
+    string search_id = 1;
+}
+
+message GetSearchResultsRequest {
+    string search_id = 1;
+}
+
+message GetSearchResultsResponse {
+    repeated SearchResult results = 1;
+}
+
+service SimilaritySearch {
+    rpc AddItem(AddItemRequest) returns (AddItemResponse);
+    rpc SearchItems(SearchItemsRequest) returns (SearchItemsResponse);
+    rpc GetSearchResults(GetSearchResultsRequest) returns (GetSearchResultsResponse);
+}
+
+
+
+
+
+
+
+
